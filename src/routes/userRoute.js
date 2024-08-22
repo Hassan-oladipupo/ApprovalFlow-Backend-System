@@ -20,7 +20,7 @@ router.post('/login',
   userController.login
 );
 
-router.post('/request-reset-password', 
+router.post('/request-reset-password',
     joiSchemaValidation.validateBody(userSchema.requestResetPasswordSchema),
     userController.requestResetPassword
   );
