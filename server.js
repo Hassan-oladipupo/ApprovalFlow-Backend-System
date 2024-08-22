@@ -16,19 +16,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 
-// app.use('/products', require('./api/routes/productRoute'));
-// app.use('/orders', require('./api/routes/orderRoute'));
-// app.use('/users', require('./api/routes/userRoute'));
-// app.use('/carts', require('./api/routes/cartRoute'));
-// app.use('/product-review', require('./api/routes/productReviewRoute'));
-// app.use('/delivery-fee', require('./api/routes/deliveryFeeRoute'));
-// app.use('/user-profile', require('./api/routes/userProfileRoute'));
-// app.use('/payment', require('./api/routes/paymentServiceRoute'));
-// app.use('/wish-list', require('./api/routes/userWhistListRoute'));
+
+app.use('/user', require('./src/routes/userRoute'));
+
 
 
 app.get('/', (req, res) => {
-  res.send('send, receive and manage approval request within an organization.');
+  res.send('Send, receive and manage approval request within an organization.');
 });
 
 const PORT = process.env.PORT || 3000;

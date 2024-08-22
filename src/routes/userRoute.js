@@ -8,9 +8,10 @@ const userSchema = require('../apiSchema/userSchema');
 router.post('/register',
   joiSchemaValidation.validateBody(userSchema.register),
   userController.register
-);
+);                              
 
-router.post('/confirm-email/:token',
+router.post('/confirm-email',
+  joiSchemaValidation.validateBody(userSchema.confirmEmail),
   userController.confirmToken
 );
 

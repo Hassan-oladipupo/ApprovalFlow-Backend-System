@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const constants = require('../constants');
 
+
 module.exports.validateToken = (req, res, next) => {
   let response = { ...constants.defaultServerResponse };
   try {
@@ -45,3 +46,8 @@ module.exports.isValidPassword = (password) => {
     hasDigits
   );
 };
+
+
+
+
+

@@ -6,7 +6,6 @@ const mongoDbDataFormat = require('../helper/dbHelper');
  const validator = require("validator");
  const accessControlValidation = require('../middleware/accessControlValidation')
  const crypto = require('crypto');
- const UserProfile = require('../models/userProfileModel')
 
 
 
@@ -46,9 +45,10 @@ module.exports.register = async ({ email, password, firstName, lastName, userRol
   }
 };
 
-module.exports.confirmToken = async (token) => {
+module.exports.confirmToken = async ({confirmToken}) => {
   try {
-    const user = await User.findOne({ confirmToken: token });
+    const user = await User.findOne({ confirmToken });
+    console.log(user);
     if (!user) {
       throw new Error(constants.userMessage.INVALID_TOKEN);
     }
@@ -90,18 +90,18 @@ module.exports.login = async ({ email, password }) => {
       throw new Error(constants.userMessage.INVALID_PASSWORD);
     }
 
-    const userProfile = await UserProfile.findOne({ email });
-    let profileImage = null;
+    // const userProfile = await UserProfile.findOne({ email });
+    // let profileImage = null;
 
-    if (userProfile && userProfile.profileImage) {
-      profileImage = userProfile.profileImage;
-    }
+    // if (userProfile && userProfile.profileImage) {
+    //   profileImage = userProfile.profileImage;
+    // }
 
     const tokenPayload = {
       id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
-      profileImage: profileImage,
+     // profileImage: profileImage,
       
     };
 

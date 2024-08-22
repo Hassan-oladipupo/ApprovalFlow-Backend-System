@@ -6,7 +6,7 @@ module.exports.register = async (req, res) => {
   let response = { ...constants.customServerResponse };
   try {
     const serviceResponse = await userService.register(req.body);
-    response.status = 200;
+    response.status = 201;
     response.message = constants.userMessage.SIGNUP_SUCCESS;
     response.body = serviceResponse;
   } catch (error) {
@@ -19,8 +19,7 @@ module.exports.register = async (req, res) => {
 module.exports.confirmToken = async (req, res) => {
   let response = { ...constants.customServerResponse };
   try {
-    const token = req.params.token; 
-    const serviceResponse = await userService.confirmToken(token);
+    const serviceResponse = await userService.confirmToken(req.body);
     response.status = 200;
     response.message = constants.userMessage.CONFIRM_TOKEN_SUCCESS;
     response.body = serviceResponse;
