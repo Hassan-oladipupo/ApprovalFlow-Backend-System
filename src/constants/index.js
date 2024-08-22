@@ -20,6 +20,13 @@ module.exports = {
     EMAIL_ALREADY_CONFIRMED: 'Email address has already been confirmed.',
     CONFIRM_TOKEN_SUCCESS: 'Email confirmed successfully'
   },
+  approvalRequestMessage: {
+    APPROVAL_CREATED: 'approval sent successfully',
+    APPROVAL_NOT_FOUND: 'approval not found',
+    UNAUTHORIZED_APPROVER: "You are not authorized to update this request",
+    INVALID_STATUS: 'Invalid status.',
+    APPROVAL_UPDATED: (status) => `Request ${status} successfully`,
+  },
   requestValidationMessage: {
     BAD_REQUEST: 'Invalid fields',
     TOKEN_MISSING: 'Token missing from header',
