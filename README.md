@@ -29,7 +29,7 @@ This is a Node.js and Express backend for managing approval requests within an o
    ```
 4. Start the server:
    ```bash
-   npm start
+   npm run dev
    ```
 
 #### API Endpoints

@@ -7,3 +7,7 @@ module.exports.createRequest = Joi.object().keys({
   approvers: Joi.array().items(Joi.string().email()).required(),
   cc: Joi.array().items(Joi.string().email()).optional(),
 });
+
+module.exports.updateRequest = Joi.object().keys({
+  status: Joi.string().required(),
+});
