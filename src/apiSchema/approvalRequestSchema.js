@@ -9,8 +9,9 @@ module.exports.createRequest = Joi.object().keys({
 });
 
 module.exports.updateRequest = Joi.object().keys({
-  status: Joi.string().required(),
+  status: Joi.string().valid('pending', 'approved', 'rejected').required(),
 });
+
 
 module.exports.editRequest = Joi.object().keys({
   title: Joi.string().optional(),

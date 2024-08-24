@@ -3,8 +3,9 @@ const mongoDbDataFormat = require('../helper/dbHelper');
 const User = require('../models/userModel');
 const constants = require('../constants/index')
 
-module.exports.createApproval = async ({ title, description, documents, approversEmails, ccEmails }, userId) => {
+module.exports.createApproval = async ({ title, description, documentUrl, approversEmails, ccEmails }, userId) => {
   try {
+    console.log('Document URL:', documentUrl);
     const approvers = await User.find({ email: { $in: approversEmails } }).select('_id');
     const cc = await User.find({ email: { $in: ccEmails } }).select('_id');
 
@@ -26,7 +27,7 @@ module.exports.createApproval = async ({ title, description, documents, approver
     const newApproval = new approval({ 
       title, 
       description, 
-      documentUrl: documents,  
+      documentUrl: documentUrl,  
       approversEmails: approverIds,  
       ccEmails: ccIds,             
       user: userId,  

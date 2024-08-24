@@ -4,7 +4,7 @@ const approvalRequestController = require('../Controller/approvalRequestControll
 const joiSchemaValidation = require('../middleware/joiSchemaValidation');
 const approvalRequestSchema = require('../apiSchema/approvalRequestSchema');
 const accessControlValidation = require('../middleware/accessControlValidation');
-const uploadsImageValidation = require('../middleware/uploadsImageValidation');
+const uploadsImageValidation = require('../middleware/uploadDocumentsValidation');
 
 
 router.post('/',
@@ -30,7 +30,7 @@ router.get('/',
     approvalRequestController.deleteApprovalRequest);   
 
 
-    
+
 // router.put('/:approvalId', 
 //   accessControlValidation.validateToken,
 //   joiSchemaValidation.validateBody(approvalRequestSchema.editRequest),
