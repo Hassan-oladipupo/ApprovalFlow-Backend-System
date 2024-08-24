@@ -62,3 +62,23 @@ module.exports.getApprovalsByUser = async (req, res) => {
   }
   return res.status(response.status).send(response);
 };
+
+
+module.exports.deleteApprovalRequest = async (req, res) => {
+  let response = {...constants.customServerResponse }; 
+  try {
+    
+    const userId = req.user.id; 
+    const serviceResponse = await approvalService.deleteApprovalRequest({
+      id: req.params.id,
+      userId: userId
+    });
+    response.status = 200;
+    response.message = constants.approvalRequestMessage.APPROVAL_REMOVED;
+    response.body = serviceResponse;
+  } catch (error) {
+    console.log('Something went wrong: Controller: deleteApprovalRequest', error);
+    response.message = error.message;
+  }
+  return res.status(response.status).send(response);
+}

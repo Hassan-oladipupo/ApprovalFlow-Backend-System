@@ -24,6 +24,13 @@ router.get('/',
   accessControlValidation.validateToken, 
   approvalRequestController.getApprovalsByUser);   
 
+
+  router.delete('/:id', 
+    accessControlValidation.validateToken, 
+    approvalRequestController.deleteApprovalRequest);   
+
+
+    
 // router.put('/:approvalId', 
 //   accessControlValidation.validateToken,
 //   joiSchemaValidation.validateBody(approvalRequestSchema.editRequest),

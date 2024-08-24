@@ -25,12 +25,13 @@ module.exports = {
     APPROVAL_UPDATED: 'approval updated successfully',
     APPROVAL_NOT_FOUND: 'approval not found',
     APPROVAL_RETRIEVED: 'Approvals retrieved successfully',
-    UNAUTHORIZED_APPROVER: "You are not authorized to update this request",
+    UNAUTHORIZED_APPROVER: "You are not authorized to this",
     USER_APPROVAL_EMPTY: 'No approval found for this user',
     INVALID_STATUS: 'Invalid status.',
     APPROVAL_UPDATED: (status) => `Request ${status} successfully`,
     APPROVER_NOT_FOUND: "Some approver emails not found",
     CC_EMAIL_NOT_FOUND:  'Some cc emails are not found',
+    APPROVAL_REMOVED: 'Approval removed successfully'
 
   },
   requestValidationMessage: {

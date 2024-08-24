@@ -1,4 +1,4 @@
-const Approval = require('../models/approvalRequestModel'); 
+const approval = require('../models/approvalRequestModel'); 
 const mongoDbDataFormat = require('../helper/dbHelper');
 const User = require('../models/userModel');
 const constants = require('../constants/index')
@@ -23,7 +23,7 @@ module.exports.createApproval = async ({ title, description, documents, approver
       throw new Error(constants.approvalRequestMessage.CC_EMAIL_NOT_FOUND);
     }
 
-    const newApproval = new Approval({ 
+    const newApproval = new approval({ 
       title, 
       description, 
       documentUrl: documents,  
@@ -51,7 +51,7 @@ module.exports.updateApprovalRequest = async (id, userId, status) => {
       throw new Error(constants.approvalRequestMessage.INVALID_STATUS);
     }
 
-    const request = await Approval.findById(id);
+    const request = await approval.findById(id);
     if (!request) {
       throw new Error(constants.approvalRequestMessage.APPROVAL_NOT_FOUND);
     }
@@ -69,7 +69,7 @@ module.exports.updateApprovalRequest = async (id, userId, status) => {
       status: status,
     };
 
-    const updatedRequest = await Approval.findByIdAndUpdate(
+    const updatedRequest = await approval.findByIdAndUpdate(
       id,
       { $set: updateData },
       { new: true }
@@ -90,7 +90,7 @@ module.exports.getApprovalsByUser = async (userId) => {
   try {
     mongoDbDataFormat.checkObjectId(userId);
 
-    const approvals = await Approval.find({
+    const approvals = await approval.find({
       $or: [
         { user: userId },
         { approversEmails: userId },
@@ -118,4 +118,22 @@ module.exports.getApprovalsByUser = async (userId) => {
     throw new Error(error.message);
   }
 };
+
+module.exports.deleteApprovalRequest = async ({ id, userId }) => {
+  try {
+    mongoDbDataFormat.checkObjectId(id);
+    let approvalRequest = await approval.findById(id);
+    if (!approvalRequest) {
+      throw new Error(constants.approvalRequestMessage.APPROVAL_NOT_FOUND);
+    }
+    if (approvalRequest.user.toString() !== userId) {
+      throw new Error(constants.approvalRequestMessage.UNAUTHORIZED_APPROVER);
+    }
+    await approval.findByIdAndDelete(id);
+    return mongoDbDataFormat.formatMongoData(approvalRequest);
+  } catch (error) {
+    console.log('Something went wrong: Service: deleteApprovalRequest', error);
+    throw new Error(error);
+  }
+}
 
