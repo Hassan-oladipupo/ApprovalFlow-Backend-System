@@ -22,10 +22,16 @@ module.exports = {
   },
   approvalRequestMessage: {
     APPROVAL_CREATED: 'approval sent successfully',
+    APPROVAL_UPDATED: 'approval updated successfully',
     APPROVAL_NOT_FOUND: 'approval not found',
+    APPROVAL_RETRIEVED: 'Approvals retrieved successfully',
     UNAUTHORIZED_APPROVER: "You are not authorized to update this request",
+    USER_APPROVAL_EMPTY: 'No approval found for this user',
     INVALID_STATUS: 'Invalid status.',
     APPROVAL_UPDATED: (status) => `Request ${status} successfully`,
+    APPROVER_NOT_FOUND: "Some approver emails not found",
+    CC_EMAIL_NOT_FOUND:  'Some cc emails are not found',
+
   },
   requestValidationMessage: {
     BAD_REQUEST: 'Invalid fields',

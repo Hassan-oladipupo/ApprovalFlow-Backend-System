@@ -18,7 +18,7 @@ app.use(morgan('dev'));
 
 
 app.use('/user', require('./src/routes/userRoute'));
-
+app.use('/request', require('./src/routes/approvalRequestRoutes'));
 
 
 app.get('/', (req, res) => {

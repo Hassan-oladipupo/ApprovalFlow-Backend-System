@@ -3,11 +3,19 @@ const Joi = require('@hapi/joi');
 module.exports.createRequest = Joi.object().keys({
   title: Joi.string().required(),
   description: Joi.string().required(),
-  documents: Joi.array().items(Joi.string()).optional(),
-  approvers: Joi.array().items(Joi.string().email()).required(),
-  cc: Joi.array().items(Joi.string().email()).optional(),
+  documentUrl: Joi.array().items(Joi.string()).optional(),
+  approversEmails: Joi.array().items(Joi.string().email()).required(),
+  ccEmails: Joi.array().items(Joi.string().email()).optional(),
 });
 
 module.exports.updateRequest = Joi.object().keys({
   status: Joi.string().required(),
+});
+
+module.exports.editRequest = Joi.object().keys({
+  title: Joi.string().optional(),
+  description: Joi.string().optional(),
+  documentUrl: Joi.array().items(Joi.string()).optional(),
+  approversEmails: Joi.array().items(Joi.string().email()).optional(),
+  ccEmails: Joi.array().items(Joi.string().email()).optional(),
 });
