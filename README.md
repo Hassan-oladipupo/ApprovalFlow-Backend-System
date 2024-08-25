@@ -11,7 +11,6 @@ This is a Node.js and Express backend for managing approval requests within an o
 1. Clone the repository and navigate to the directory:
    ```bash
    git clone https://github.com/Hassan-oladipupo/ApprovalFlow-Backend-System.git
-   cd approval-system
    ```
 2. Install dependencies:
    ```bash
