@@ -30,10 +30,12 @@ router.get('/',
     approvalRequestController.deleteApprovalRequest);   
 
 
+router.put('/edit/:id',
+  accessControlValidation.validateToken,
+  joiSchemaValidation.validateBody(approvalRequestSchema.editRequest),
+  approvalRequestController.updateExitingApprovalRequest  
+); 
 
-// router.put('/:approvalId', 
-//   accessControlValidation.validateToken,
-//   joiSchemaValidation.validateBody(approvalRequestSchema.editRequest),
-//   approvalRequestController.editApproval);
+
 
 module.exports = router;

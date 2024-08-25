@@ -90,3 +90,21 @@ module.exports.deleteApprovalRequest = async (req, res) => {
   }
   return res.status(response.status).send(response);
 }
+
+module.exports.updateExitingApprovalRequest = async (req, res) => {
+  let response = {...constants.customServerResponse }; 
+  try {
+    const serviceResponse = await approvalService.updateExitingApprovalRequest({
+      id: req.params.id,
+      updateInfo: req.body
+    });
+      response.status = 200;
+     response.message = constants.approvalRequestMessage.APPROVAL_UPDATED;
+      response.body = serviceResponse;
+    
+  } catch (error) {
+    console.log('Something went wrong: Controller: updateExitingApprovalRequest', error);
+    response.message = error.message;
+  }
+  return res.status(response.status).send(response);
+}

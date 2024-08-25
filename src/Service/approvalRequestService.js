@@ -138,3 +138,21 @@ module.exports.deleteApprovalRequest = async ({ id, userId }) => {
   }
 }
 
+
+module.exports.updateExitingApprovalRequest = async ({ id, updateInfo }) => {
+  try {
+    mongoDbDataFormat.checkObjectId(id);
+    let approvalRequest = await approval.findOneAndUpdate(
+      { _id: id },
+      updateInfo,
+      { new: true }
+    )
+    if (!approvalRequest) {
+      throw new Error(constants.approvalRequestMessage.APPROVAL_NOT_FOUND);
+    }
+    return mongoDbDataFormat.formatMongoData(approvalRequest);
+  } catch (error) {
+    console.log('Something went wrong: Service: updateExitingApprovalRequest', error);
+    throw new Error(error);
+  }
+}
