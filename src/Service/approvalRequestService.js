@@ -92,7 +92,8 @@ module.exports.getApprovalsByUser = async (userId) => {
     })
     .populate('user', 'email') 
     .populate('approversEmails', 'email')
-    .populate('ccEmails', 'email');
+    .populate('ccEmails', 'email')
+    .populate('comments', 'comment');
 
     if (!approvals || approvals.length === 0) {
       return [];
@@ -102,7 +103,9 @@ module.exports.getApprovalsByUser = async (userId) => {
       ...approval.toObject(),
       user: approval.user.email,
       approversEmails: approval.approversEmails.map(approver => approver.email),
-      ccEmails: approval.ccEmails.map(cc => cc.email)
+      ccEmails: approval.ccEmails.map(cc => cc.email),
+      comments: approval.comments.map(Comment => Comment.comment)
+
     }));
 
     return formattedApprovals;

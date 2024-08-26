@@ -20,7 +20,6 @@ app.use(morgan('dev'));
 app.use('/user', require('./src/routes/userRoute'));
 app.use('/request', require('./src/routes/approvalRequestRoutes'));
 
-
 app.get('/', (req, res) => {
   res.send('Send, receive and manage approval request within an organization.');
 });

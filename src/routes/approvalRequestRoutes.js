@@ -5,6 +5,8 @@ const joiSchemaValidation = require('../middleware/joiSchemaValidation');
 const approvalRequestSchema = require('../apiSchema/approvalRequestSchema');
 const accessControlValidation = require('../middleware/accessControlValidation');
 const uploadsImageValidation = require('../middleware/uploadDocumentsValidation');
+const approvalCommentController = require('../Controller/approvalCommentController');
+const approvalCommentSchema = require('../apiSchema/approvalCommentSchema');
 
 
 router.post('/',
@@ -35,6 +37,16 @@ router.put('/edit/:id',
   joiSchemaValidation.validateBody(approvalRequestSchema.editRequest),
   approvalRequestController.updateExitingApprovalRequest  
 ); 
+
+
+router.post('/:id/comment',
+  accessControlValidation.validateToken,
+  joiSchemaValidation.validateBody(approvalCommentSchema.addComment),
+  approvalCommentController.addCommentToApprovalRequest
+);    
+router.delete('/:id/comment', 
+  accessControlValidation.validateToken, 
+  approvalCommentController.removeComment);   
 
 
 

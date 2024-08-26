@@ -21,9 +21,9 @@ module.exports = {
     CONFIRM_TOKEN_SUCCESS: 'Email confirmed successfully'
   },
   approvalRequestMessage: {
-    APPROVAL_CREATED: 'approval sent successfully',
-    APPROVAL_UPDATED: 'approval updated successfully',
-    APPROVAL_NOT_FOUND: 'approval not found',
+    APPROVAL_CREATED: 'Approval sent successfully',
+    APPROVAL_UPDATED: 'Approval updated successfully',
+    APPROVAL_NOT_FOUND: 'Approval not found',
     APPROVAL_RETRIEVED: 'Approvals retrieved successfully',
     UNAUTHORIZED_APPROVER: "You are not authorized to this",
     USER_APPROVAL_EMPTY: 'No approval found for this user',
@@ -33,6 +33,13 @@ module.exports = {
     CC_EMAIL_NOT_FOUND:  'Some cc emails are not found',
     APPROVAL_REMOVED: 'Approval removed successfully'
 
+  },
+  commentRequestMessage:{
+    APPROVAL_NOT_FOUND: "Approval request not found",
+  UNAUTHORIZED_COMMENTER: "You are not authorized to add a comment to this approval request",
+  COMMENT_ADDED: "Comment added successfully",
+  COMMENT_NOT_FOUND: 'Comment not found',
+  COMMENT_REMOVED: "Comment removed successfully",
   },
   requestValidationMessage: {
     BAD_REQUEST: 'Invalid fields',
