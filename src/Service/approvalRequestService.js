@@ -147,7 +147,6 @@ module.exports.updateExitingApprovalRequest = async ({ id, updateInfo, userId })
       throw new Error(constants.approvalRequestMessage.UNAUTHORIZED_APPROVER);
     }
 
-    console.log("Update Info before update:", updateInfo);  
 
     let updatedRequest = await approval.findOneAndUpdate(
       { _id: id },
@@ -155,7 +154,6 @@ module.exports.updateExitingApprovalRequest = async ({ id, updateInfo, userId })
       { new: true }  
     );
 
-    console.log('Updated Request after update:', updatedRequest);  
 
     return mongoDbDataFormat.formatMongoData(updatedRequest);
   } catch (error) {

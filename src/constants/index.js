@@ -36,7 +36,8 @@ module.exports = {
   },
   commentRequestMessage:{
     APPROVAL_NOT_FOUND: "Approval request not found",
-  UNAUTHORIZED_COMMENTER: "You are not authorized to add a comment to this approval request",
+  UNAUTHORIZED_COMMENTER: "You are not authorized to do this",
+  COMMENT_UPDATED: "comment updated successfully",
   COMMENT_ADDED: "Comment added successfully",
   COMMENT_NOT_FOUND: 'Comment not found',
   COMMENT_REMOVED: "Comment removed successfully",

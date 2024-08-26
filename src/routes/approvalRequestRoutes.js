@@ -48,6 +48,9 @@ router.delete('/:id/comment',
   accessControlValidation.validateToken, 
   approvalCommentController.removeComment);   
 
-
+  router.put('/:id/comment', 
+    accessControlValidation.validateToken, 
+    joiSchemaValidation.validateBody(approvalCommentSchema.editComment),
+    approvalCommentController.updateExitingComment);
 
 module.exports = router;

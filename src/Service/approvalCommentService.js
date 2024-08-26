@@ -37,6 +37,34 @@ module.exports.addCommentToApprovalRequest = async (id, commentText, userId) => 
   }
 };
 
+module.exports.updateExitingComment = async ({ id, updateInfo, userId }) => {
+    try {
+      mongoDbDataFormat.checkObjectId(id);
+  
+      let approvalComment = await Comment.findById(id);
+      if (!approvalComment) {
+        throw new Error(constants.commentRequestMessage.COMMENT_NOT_FOUND);
+      }
+  
+    //   if (!approvalComment.comment.user.includes(userId)) {
+    //     throw new Error(constants.commentRequestMessage.UNAUTHORIZED_COMMENTER);
+    //   }
+  
+  
+      let updatedComment = await Comment.findOneAndUpdate(
+        { _id: id },
+        { $set: updateInfo },  
+        { new: true }  
+      );
+  
+  
+      return mongoDbDataFormat.formatMongoData(updatedComment);
+    } catch (error) {
+      console.log('Something went wrong: Service: updateExitingComment', error);
+      throw new Error(error);
+    }
+  };
+
 
 module.exports.removeComment = async ({ id, userId }) => {
     try {

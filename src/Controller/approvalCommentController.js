@@ -37,4 +37,28 @@ module.exports.removeComment  = async (req, res) => {
     response.message = error.message;
   }
   return res.status(response.status).send(response);
-}
+};
+
+module.exports.updateExitingComment = async (req, res) => {
+  let response = { ...constants.customServerResponse }; 
+  try {
+    const { id } = req.params;  
+    const updateInfo = req.body;  
+    const userId = req.user.id;  
+
+    const serviceResponse = await commentService.updateExitingComment({
+      id, 
+      updateInfo, 
+      userId
+    });
+
+    response.status = 200;  
+    response.message = constants.commentRequestMessage.COMMENT_UPDATED;  
+    response.body = serviceResponse;  
+
+  } catch (error) {
+    console.log('Something went wrong: Controller: updateExitingComment', error);
+    response.message = error.message;  
+  }
+  return res.status(response.status).send(response);  
+};
