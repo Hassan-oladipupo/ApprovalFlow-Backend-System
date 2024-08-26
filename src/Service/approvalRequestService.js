@@ -12,10 +12,6 @@ module.exports.createApproval = async ({ title, description, documentUrl, approv
     const approverIds = approvers.map(approver => approver._id);
     const ccIds = cc.map(ccUser => ccUser._id);
 
-    
-
-    
-
     if (approvers.length !== approversEmails.length) {
       throw new Error(constants.approvalRequestMessage.APPROVAL_NOT_FOUND);
     }
@@ -67,7 +63,7 @@ module.exports.updateApprovalRequest = async (id, userId, status) => {
 
     const updateData = {
       [status === 'approved' ? 'approvedBy' : 'rejectedBy']: userId,
-      status: status,
+      status: status, 
     };
 
     const updatedRequest = await approval.findByIdAndUpdate(
@@ -82,10 +78,6 @@ module.exports.updateApprovalRequest = async (id, userId, status) => {
     throw new Error(error.message);
   }
 };
-
-
-
-
 
 module.exports.getApprovalsByUser = async (userId) => {
   try {
@@ -139,20 +131,32 @@ module.exports.deleteApprovalRequest = async ({ id, userId }) => {
 }
 
 
-module.exports.updateExitingApprovalRequest = async ({ id, updateInfo }) => {
+module.exports.updateExitingApprovalRequest = async ({ id, updateInfo, userId }) => {
   try {
     mongoDbDataFormat.checkObjectId(id);
-    let approvalRequest = await approval.findOneAndUpdate(
-      { _id: id },
-      updateInfo,
-      { new: true }
-    )
+
+    let approvalRequest = await approval.findById(id);
     if (!approvalRequest) {
       throw new Error(constants.approvalRequestMessage.APPROVAL_NOT_FOUND);
     }
-    return mongoDbDataFormat.formatMongoData(approvalRequest);
+
+    if (!approvalRequest.approversEmails.includes(userId)) {
+      throw new Error(constants.approvalRequestMessage.UNAUTHORIZED_APPROVER);
+    }
+
+    console.log("Update Info before update:", updateInfo);  
+
+    let updatedRequest = await approval.findOneAndUpdate(
+      { _id: id },
+      { $set: updateInfo },  
+      { new: true }  
+    );
+
+    console.log('Updated Request after update:', updatedRequest);  
+
+    return mongoDbDataFormat.formatMongoData(updatedRequest);
   } catch (error) {
     console.log('Something went wrong: Service: updateExitingApprovalRequest', error);
     throw new Error(error);
   }
-}
+};
