@@ -46,9 +46,10 @@ module.exports.updateExitingComment = async ({ id, updateInfo, userId }) => {
         throw new Error(constants.commentRequestMessage.COMMENT_NOT_FOUND);
       }
   
-    //   if (!approvalComment.comment.user.includes(userId)) {
-    //     throw new Error(constants.commentRequestMessage.UNAUTHORIZED_COMMENTER);
-    //   }
+      if (!approvalComment.user.equals(userId)) {
+        throw new Error(constants.commentRequestMessage.UNAUTHORIZED_COMMENTER);
+      }
+      
   
   
       let updatedComment = await Comment.findOneAndUpdate(
